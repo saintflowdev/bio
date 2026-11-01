@@ -1,0 +1,228 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>saintflow — Вайб-кодинг. Разработка. Автоматизация.</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;800&display=swap&subset=cyrillic" rel="stylesheet">
+<style>
+:root{--bg:#0a0a14;--card:#12111f;--card2:#191730;--line:#2a2548;--tx:#f1effc;--mut:#8f8aae;--ac:#7c4dff;--ac2:#a98bff;--glow:rgba(124,77,255,.35);
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0a0a14}}
+:root[data-theme="dark"]{--bg:#0a0a14}
+html{scroll-padding-top:env(safe-area-inset-top,0px);scroll-behavior:smooth}
+*{box-sizing:border-box;margin:0}
+body{background:var(--bg);color:var(--tx);font:400 16px/1.55 Manrope,system-ui,sans-serif;overflow-x:hidden;
+background-image:radial-gradient(60% 50% at 80% 0%,rgba(124,77,255,.22),transparent 70%),radial-gradient(40% 40% at 0% 60%,rgba(124,77,255,.1),transparent 70%)}
+a{color:inherit;text-decoration:none}
+.wrap{max-width:1180px;margin:0 auto;padding:0 20px}
+nav{display:flex;align-items:center;justify-content:space-between;padding:22px 0}
+.logo{display:flex;align-items:center;gap:12px;font-weight:800;font-size:20px}
+.logo i{width:42px;height:42px;border-radius:50%;border:2px solid var(--ac);display:grid;place-items:center;font-style:normal;box-shadow:0 0 22px var(--glow);font-size:15px}
+nav ul{display:flex;gap:28px;list-style:none;color:var(--mut);font-weight:500}
+nav ul a:hover{color:var(--tx)}
+.btn{display:inline-flex;align-items:center;gap:10px;background:linear-gradient(135deg,#6a3df0,#8a5cff);color:#fff;font-weight:600;padding:15px 26px;border-radius:12px;box-shadow:0 10px 30px var(--glow);border:0;cursor:pointer;font:inherit;font-weight:600}
+.btn.ghost{background:var(--card2);box-shadow:none;border:1px solid var(--line)}
+.hero{display:grid;grid-template-columns:1.1fr .9fr;gap:30px;align-items:center;padding:50px 0 80px;min-height:78vh}
+h1{font-size:clamp(44px,7vw,84px);line-height:1.02;font-weight:800;letter-spacing:-.03em}
+h1 span{display:block;color:var(--ac2)}
+.lead{color:#cfcae8;font-size:clamp(17px,2vw,21px);max-width:30em;margin:26px 0 34px}
+.cta{display:flex;gap:14px;flex-wrap:wrap}
+.visual{position:relative;height:440px;perspective:900px}
+.laptop{position:absolute;inset:20px 0 auto 0;height:300px;background:linear-gradient(160deg,#1b1838,#0d0c1b);border:1px solid var(--line);border-radius:16px;padding:18px;font:12px/1.7 ui-monospace,Menlo,monospace;color:#7fe3b0;box-shadow:0 30px 80px rgba(80,40,200,.35);overflow:hidden}
+.laptop b{color:var(--ac2);font-weight:400}.laptop em{color:#ffb86b;font-style:normal}
+.laptop .l{opacity:0;white-space:nowrap}
+.float{position:absolute;width:72px;height:72px;border-radius:20px;background:linear-gradient(145deg,#3b2a86,#1c1640);border:1px solid var(--line);display:grid;place-items:center;font-size:30px;box-shadow:0 14px 40px var(--glow)}
+.f1{top:-4px;left:-8px}.f2{top:150px;right:-10px}.f3{bottom:40px;left:30px}
+section{padding:70px 0}
+h2{font-size:clamp(30px,4vw,44px);font-weight:800;letter-spacing:-.02em;margin-bottom:34px}
+.stats{display:grid;grid-template-columns:repeat(2,1fr);gap:16px;margin-bottom:10px}
+.stat{background:var(--card);border:1px solid var(--line);border-radius:18px;padding:24px}
+.stat strong{display:block;font-size:56px;line-height:1.1;font-weight:800;color:var(--ac2)}
+.stat span{color:var(--mut);font-size:22px;line-height:1.35;display:block;margin-top:6px}
+.grid{display:grid;grid-template-columns:repeat(3,1fr);gap:20px}
+.card{background:var(--card);border:1px solid var(--line);border-radius:20px;overflow:hidden;transform-style:preserve-3d;will-change:transform;display:flex;flex-direction:column}
+.thumb{height:190px;background:linear-gradient(160deg,#1d1a3d,#0c0b19);position:relative;padding:20px;overflow:hidden}
+.card h3{font-size:19px;padding:20px 22px 4px}
+.card p{color:var(--mut);padding:0 22px 22px;font-size:15px}
+.tags{display:flex;gap:8px;padding:0 22px 22px;flex-wrap:wrap;margin-top:auto}
+.tags span{font-size:13px;padding:4px 10px;border-radius:99px;background:var(--card2);border:1px solid var(--line);color:var(--ac2)}
+.bars{position:absolute;left:20px;right:20px;bottom:0;height:120px;display:flex;align-items:flex-end;gap:9px}
+.bars i{flex:1;background:linear-gradient(var(--ac2),var(--ac));border-radius:5px 5px 0 0;height:10%}
+.land h4{font-size:24px;line-height:1.1;margin-top:34px}.land h4 span{color:var(--ac2);display:block}
+.land .pill{display:inline-block;margin-top:14px;background:var(--ac);border-radius:6px;width:90px;height:20px}
+.bub{background:var(--card2);border-radius:14px;padding:12px 16px;margin-top:12px;display:inline-block;max-width:80%;opacity:0}
+.bub.me{margin-left:auto;display:block;width:fit-content;background:#3a2a8a}
+.chips{display:flex;flex-wrap:wrap;gap:12px}
+.chip{background:var(--card2);border:1px solid var(--line);padding:12px 20px;border-radius:14px;font-weight:600;cursor:default}
+.contact{text-align:center;background:linear-gradient(180deg,var(--card),#150f33);border:1px solid var(--line);border-radius:28px;padding:70px 20px}
+.contact p{color:var(--mut);margin:10px 0 30px}
+.profile{max-width:420px;margin:0 auto;background:linear-gradient(180deg,var(--card),#0f0e1d);border:1px solid var(--line);border-radius:26px;padding:28px;box-shadow:0 30px 80px rgba(80,40,200,.25)}
+.ph{display:flex;align-items:center;gap:18px}
+.av{width:84px;height:84px;flex:none;border-radius:50%;border:3px solid var(--ac);display:grid;place-items:center;font-weight:800;font-size:24px;background:#0a0a14;box-shadow:0 0 30px var(--glow)}
+.ph strong{font-size:26px;font-weight:800;display:block;line-height:1.2}.ph strong i{color:var(--ac2);font-style:normal}
+.ph span{color:var(--mut)}
+.pb{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin:22px 0}
+.pb a{background:var(--card2);border:1px solid var(--line);border-radius:14px;padding:14px 6px;text-align:center;font-size:14px;color:var(--mut);display:block}
+.pb a b{display:block;font-size:20px;color:var(--ac2);font-weight:400}
+.profile h5{color:var(--ac2);font-size:18px;font-weight:600;margin-bottom:8px}
+.profile p{margin-bottom:14px}
+.pl{border-top:1px solid var(--line);padding-top:16px;color:var(--mut);display:grid;gap:12px}
+.pl a{color:var(--ac2);display:block}
+footer{text-align:center;color:var(--mut);padding:40px 0 60px;font-size:14px}
+#dot,#ring{position:fixed;left:0;top:0;pointer-events:none;z-index:99;border-radius:50%;display:none}
+#dot{width:5px;height:5px;margin:-2.5px;background:#fff}
+#ring{width:22px;height:22px;margin:-11px;border:1.5px solid var(--ac2);background:rgba(124,77,255,.08)}
+@media (hover:hover) and (pointer:fine){body.cur,body.cur a,body.cur button{cursor:none}body.cur #dot,body.cur #ring{display:block}}
+@media (max-width:860px){.hero{grid-template-columns:1fr;min-height:0}.visual{height:360px}.grid{grid-template-columns:1fr}.stats{grid-template-columns:1fr}nav ul{display:none}}
+@media (prefers-reduced-motion:reduce){html{scroll-behavior:auto}}
+
+html{-webkit-text-size-adjust:100%}a,button{-webkit-tap-highlight-color:transparent}
+.btn{min-height:48px;justify-content:center}
+@media (max-width:860px){.wrap{padding:0 16px}nav{padding:16px 0}.hero{padding:24px 0 48px;gap:10px}section{padding:44px 0}h2{margin-bottom:22px}.lead{margin:18px 0 26px}.visual{height:330px}.laptop{inset:24px 6px auto 6px;height:250px}}
+@media (max-width:560px){
+.logo{font-size:17px}.logo i{width:36px;height:36px;font-size:13px}
+nav .btn{padding:10px 14px;min-height:40px;font-size:14px;border-radius:10px}
+h1{font-size:clamp(34px,11vw,48px)}
+.cta{flex-direction:column}.cta .btn{width:100%}
+.visual{height:290px}.laptop{height:215px;padding:12px;font-size:10.5px;line-height:1.6}
+.float{width:52px;height:52px;border-radius:15px;font-size:22px}.f1{left:0}.f2{top:120px;right:0}.f3{bottom:30px;left:14px}
+.stat{padding:18px}.stat strong{font-size:44px}.stat span{font-size:18px}
+.profile{padding:20px;border-radius:22px}.av{width:68px;height:68px;font-size:19px}.ph strong{font-size:22px}.pb a{padding:12px 2px;font-size:12.5px}
+.thumb{height:170px}.contact{padding:44px 16px;border-radius:22px}.contact .btn{width:100%}
+}
+@media (hover:none){.card,.profile{transform:none!important}}
+</style>
+</head>
+<body>
+<div id="ring"></div><div id="dot"></div>
+<div class="wrap">
+<nav>
+  <a class="logo" href="#top"><i>&lt;/&gt;</i>saintflow</a>
+  <ul><li><a href="#projects">Проекты</a></li><li><a href="#contact">Контакты</a></li></ul>
+  <a class="btn ghost mag" href="https://t.me/saintflowdev" target="_blank" rel="noopener">@saintflowdev</a>
+</nav>
+
+<header class="hero" id="top">
+  <div>
+    <h1><b class="w">Вайб-кодинг.</b><span class="w">Разработка. Автоматизация.</span></h1>
+    <p class="lead w">Создаю современные решения: сайты, приложения, Telegram-боты и полезные инструменты.</p>
+    <div class="cta w">
+      <a class="btn mag" href="https://t.me/saintflowdev" target="_blank" rel="noopener">Обсудить проект ✈</a>
+      <a class="btn ghost mag" href="#projects">Смотреть проекты</a>
+    </div>
+  </div>
+  <div class="visual">
+    <div class="laptop" id="code">
+      <div class="l"><b>const</b> project = {</div>
+      <div class="l">&nbsp;&nbsp;idea: <em>"твоя идея"</em>,</div>
+      <div class="l">&nbsp;&nbsp;stack: [<em>"Python"</em>, <em>"JS"</em>, <em>"AI"</em>],</div>
+      <div class="l">&nbsp;&nbsp;result: <em>"работает"</em></div>
+      <div class="l">};</div>
+      <div class="l"><b>await</b> ship(project); <em>// Идея → Код → Результат</em></div>
+      <div class="l">&nbsp;</div>
+      <div class="l"><b>bot</b>.onMessage(msg =&gt; reply(<em>"Привет! 👋"</em>));</div>
+    </div>
+    <div class="float f1">&lt;/&gt;</div>
+    <div class="float f2">🌐</div>
+    <div class="float f3">✈</div>
+  </div>
+</header>
+
+<section id="about" style="padding-top:20px">
+  <div class="profile tilt">
+    <div class="ph"><div class="av">&lt;/&gt;</div><div><strong>saintflow <i>☆</i></strong><span>был(а) недавно</span></div></div>
+    <div class="pb"><a class="mag" href="https://t.me/saintflowdev" target="_blank" rel="noopener"><b>💬</b>Чат</a><a class="mag" href="#contact"><b>🔔</b>Уведомления</a><a class="mag" href="#projects"><b>•••</b>Ещё</a></div>
+    <h5>О себе</h5>
+    <p>Разрабатываю сайты, приложения, Telegram-ботов и автоматизирую рутинные задачи.</p>
+    <p>Пишу на Python, JS, использую AI и современные технологии.</p>
+    <div class="pl"><span>💻 Идеи → Код → Результат</span><a href="https://t.me/saintflowdev" target="_blank" rel="noopener">✈ Связь<br>@saintflowdev</a></div>
+  </div>
+</section>
+
+<section id="projects">
+  <h2>Мои проекты</h2>
+  <div class="grid">
+    <article class="card tilt">
+      <div class="thumb land"><h4>Современный<span>лендинг</span></h4><div class="pill"></div></div>
+      <h3>Лендинг-платформа</h3><p>Стильный и адаптивный сайт для вашего бизнеса.</p>
+      <div class="tags"><span>Next.js</span><span>Tailwind</span><span>Vercel</span></div>
+    </article>
+    <article class="card tilt">
+      <div class="thumb" id="chat"><div class="bub">Привет! 👋 Я полезный бот.</div><div class="bub me">/start</div><div class="bub">Чем могу помочь?</div></div>
+      <h3>Telegram-бот</h3><p>Бот с полезными функциями и удобным UI.</p>
+      <div class="tags"><span>Python</span><span>Telegram Bot API</span></div>
+    </article>
+    <article class="card tilt">
+      <div class="thumb"><div class="bars" id="bars"></div></div>
+      <h3>Панель аналитики</h3><p>Удобный инструмент для анализа данных.</p>
+      <div class="tags"><span>React</span><span>PostgreSQL</span></div>
+    </article>
+  </div>
+</section>
+
+<section id="contact">
+  <div class="contact">
+    <h2 style="margin-bottom:0">Идея → Код → Результат</h2>
+    <p>Расскажите, что нужно сделать — отвечу в Telegram.</p>
+    <a class="btn mag" href="https://t.me/saintflowdev" target="_blank" rel="noopener">Написать @saintflowdev ✈</a>
+  </div>
+</section>
+<footer>© 2026 saintflow</footer>
+</div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/animejs/3.2.1/anime.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/motion@11.11.13/dist/motion.js"></script>
+<script>
+(function(){
+var reduce=matchMedia('(prefers-reduced-motion:reduce)').matches;
+var bars=document.getElementById('bars'),h=[35,50,40,65,55,80,60,95];
+h.forEach(function(){bars.appendChild(document.createElement('i'))});
+document.querySelectorAll('.l,.bub').forEach(function(e){e.style.opacity=1});
+
+/* anime.js — вход, код, графики, счётчики, плавающие иконки */
+if(window.anime){
+  document.querySelectorAll('.l,.bub').forEach(function(e){e.style.opacity=0});
+  anime.timeline({easing:'easeOutExpo'})
+   .add({targets:'.w',translateY:[40,0],opacity:[0,1],duration:1100,delay:anime.stagger(140)})
+   .add({targets:'.laptop',opacity:[0,1],translateY:[30,0],duration:900},'-=900')
+   .add({targets:'.laptop .l',opacity:[0,1],translateX:[-12,0],duration:500,delay:anime.stagger(160)},'-=500')
+   .add({targets:'.float',scale:[0,1],opacity:[0,1],delay:anime.stagger(150),duration:800,easing:'easeOutElastic(1,.6)'},'-=900');
+  if(!reduce)anime({targets:'.float',translateY:[-10,10],direction:'alternate',loop:true,easing:'easeInOutSine',duration:2400,delay:anime.stagger(500)});
+  var io=new IntersectionObserver(function(es){es.forEach(function(e){if(!e.isIntersecting)return;io.unobserve(e.target);var t=e.target;
+    if(t.id==='bars')anime({targets:'#bars i',height:function(el,i){return h[i]+'%'},delay:anime.stagger(90),duration:900,easing:'easeOutBack'});
+    else if(t.id==='chat')anime({targets:'#chat .bub',opacity:[0,1],translateY:[10,0],delay:anime.stagger(500),duration:500,easing:'easeOutQuad'});
+    else if(t.classList.contains('stat')){var n=t.querySelector('strong'),o={v:0};anime({targets:o,v:+n.dataset.n,round:1,duration:1400,easing:'easeOutExpo',update:function(){n.textContent=o.v}})}
+  })},{threshold:.4});
+  ['#bars','#chat','.stat'].forEach(function(s){document.querySelectorAll(s).forEach(function(e){io.observe(e)})});
+}else{document.querySelectorAll('[data-n]').forEach(function(n){n.textContent=n.dataset.n});document.querySelectorAll('#bars i').forEach(function(b,i){b.style.height=h[i]+'%'})}
+
+/* Motion — курсор, магнитные кнопки, наклон карточек */
+var M=window.Motion;
+if(M&&M.animate&&matchMedia('(hover:hover) and (pointer:fine)').matches){
+  var A=M.animate,dot=document.getElementById('dot'),ring=document.getElementById('ring');
+  document.body.classList.add('cur');
+  addEventListener('mousemove',function(e){
+    A(dot,{x:e.clientX,y:e.clientY},{duration:0});
+    A(ring,{x:e.clientX,y:e.clientY},{type:'spring',stiffness:180,damping:20});
+  });
+  document.querySelectorAll('a,button,.chip,.card').forEach(function(el){
+    el.addEventListener('mouseenter',function(){A(ring,{scale:1.5,backgroundColor:'rgba(124,77,255,.22)'},{duration:.25})});
+    el.addEventListener('mouseleave',function(){A(ring,{scale:1,backgroundColor:'rgba(124,77,255,.08)'},{duration:.25})});
+  });
+  document.querySelectorAll('.mag').forEach(function(el){
+    el.addEventListener('mousemove',function(e){var r=el.getBoundingClientRect();
+      A(el,{x:(e.clientX-r.left-r.width/2)*.3,y:(e.clientY-r.top-r.height/2)*.4},{type:'spring',stiffness:300,damping:18})});
+    el.addEventListener('mouseleave',function(){A(el,{x:0,y:0},{type:'spring',stiffness:300,damping:12})});
+  });
+  document.querySelectorAll('.tilt').forEach(function(c){
+    c.addEventListener('mousemove',function(e){var r=c.getBoundingClientRect(),px=(e.clientX-r.left)/r.width-.5,py=(e.clientY-r.top)/r.height-.5;
+      A(c,{rotateY:px*12,rotateX:-py*12,y:-6},{type:'spring',stiffness:200,damping:20})});
+    c.addEventListener('mouseleave',function(){A(c,{rotateX:0,rotateY:0,y:0},{type:'spring',stiffness:200,damping:16})});
+  });
+}
+})();
+</script>
+</body>
+</html>
